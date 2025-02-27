@@ -7,6 +7,9 @@ export default function Home() {
 
   return (
     <div className='min-h-screen'>
+      {/* For Auth Testing */}
+      {/* <ClerkTestModule /> */}
+
       <div className='max-w-[1800px] mx-auto p-4'>
         <Header />
 
@@ -14,10 +17,8 @@ export default function Home() {
           <EditorPanel />
           <OutputPanel />
         </div>
-
-        {/* For Auth Testing */}
-        {/* <ClerkTestModule /> */}
       </div>
+
     </div>
   );
 }
