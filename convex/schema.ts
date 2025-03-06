@@ -1,9 +1,9 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { defineSchema, defineTable } from 'convex/server';
+import { v } from 'convex/values';
 
 export default defineSchema({
     users: defineTable({
-        userId: v.string(), //clerkId
+        userId: v.string(), // clerkId
         email: v.string(),
         name: v.string(),
         isPro: v.boolean(),
@@ -32,11 +32,11 @@ export default defineSchema({
         snippetId: v.id('snippets'),
         userId: v.string(),
         userName: v.string(),
-        content: v.string(), // stores HTML content
+        content: v.string(), // This will store HTML content
     }).index('by_snippet_id', ['snippetId']),
 
     stars: defineTable({
-        userId: v.id('users'),
+        userId: v.string(),
         snippetId: v.id('snippets'),
     })
         .index('by_user_id', ['userId'])
