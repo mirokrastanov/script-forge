@@ -1,7 +1,7 @@
 "use client";
 
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
 import { Editor } from "@monaco-editor/react";
 import { motion } from "framer-motion";
@@ -11,10 +11,12 @@ import { useClerk } from "@clerk/nextjs";
 import useMounted from "@/hooks/useMounted";
 import { EditorPanelSkeleton } from "./EditorPanelSkeleton";
 import ShareSnippetDialog from "./ShareSnippetDialog";
+import ConfirmationDialog from "@/components/ConfirmationDialog";
 
 function EditorPanel() {
     const clerk = useClerk();
     const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
+    const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] = useState(false);
     const { language, theme, fontSize, editor, setFontSize, setEditor } = useCodeEditorStore();
 
     const mounted = useMounted();
@@ -30,11 +32,13 @@ function EditorPanel() {
         if (savedFontSize) setFontSize(parseInt(savedFontSize));
     }, [setFontSize]);
 
-    const handleRefresh = () => {
-        // TODO: Add a confirmation dialog
+    const handleRefresh = (e: FormEvent) => {
+        e.preventDefault();
+
         const defaultCode = LANGUAGE_CONFIG[language].defaultCode;
         if (editor) editor.setValue(defaultCode);
         localStorage.removeItem(`editor-code-${language}`);
+        setIsConfirmationDialogOpen(false);
     };
 
     const handleEditorChange = (value: string | undefined) => {
@@ -79,7 +83,9 @@ function EditorPanel() {
                         </div>
 
                         {/* Refresh Button */}
-                        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} onClick={handleRefresh}
+                        <motion.button
+                            onClick={() => setIsConfirmationDialogOpen(true)}
+                            whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}
                             className="p-2 bg-[#1e1e2e] hover:bg-[#2a2a3a] rounded-lg ring-1 ring-white/5 
                             transition-colors" aria-label="Reset to default code">
                             <RotateCcwIcon className="size-4 text-gray-400" />
@@ -87,7 +93,8 @@ function EditorPanel() {
 
                         {/* Share Button */}
                         <motion.button
-                            whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => setIsShareDialogOpen(true)}
+                            onClick={() => setIsShareDialogOpen(true)}
+                            whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden 
                             bg-gradient-to-r from-blue-500 to-blue-600 opacity-90 hover:opacity-100 transition-opacity">
                             <ShareIcon className="size-4 text-white" />
@@ -134,6 +141,10 @@ function EditorPanel() {
                 </div>
             </div>
             {isShareDialogOpen && <ShareSnippetDialog onClose={() => setIsShareDialogOpen(false)} />}
+            {isConfirmationDialogOpen && <ConfirmationDialog
+                closeDialog={() => setIsConfirmationDialogOpen(false)}
+                resetCode={handleRefresh}
+            />}
         </div>
     );
 }
