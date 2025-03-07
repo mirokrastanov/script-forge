@@ -106,6 +106,16 @@ export const getSnippets = query({
     },
 });
 
+export const getSnippetById = query({
+    args: { snippetId: v.id("snippets") },
+    handler: async (ctx, args) => {
+        const snippet = await ctx.db.get(args.snippetId);
+        if (!snippet) throw new Error("Snippet not found");
+
+        return snippet;
+    },
+});
+
 export const isSnippetStarred = query({
     args: {
         snippetId: v.id("snippets"),
@@ -137,5 +147,22 @@ export const getSnippetStarCount = query({
             .collect();
 
         return stars.length;
+    },
+});
+
+export const getStarredSnippets = query({
+    handler: async (ctx) => {
+        const identity = await ctx.auth.getUserIdentity();
+        if (!identity) return [];
+
+        const stars = await ctx.db
+            .query("stars")
+            .withIndex("by_user_id")
+            .filter((q) => q.eq(q.field("userId"), identity.subject))
+            .collect();
+
+        const snippets = await Promise.all(stars.map((star) => ctx.db.get(star.snippetId)));
+
+        return snippets.filter((snippet) => snippet !== null);
     },
 });
