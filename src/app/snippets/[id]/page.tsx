@@ -6,8 +6,10 @@ import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import SnippetLoadingSkeleton from "./_components/SnippetLoadingSkeleton";
 import NavigationHeader from "@/components/NavigationHeader";
-import { Clock, MessageSquare, User } from "lucide-react";
-
+import { Clock, Code, MessageSquare, User } from "lucide-react";
+import { Editor } from "@monaco-editor/react";
+import { defineMonacoThemes, LANGUAGE_CONFIG } from "@/app/(root)/_constants";
+import CopyButton from "./_components/CopyButton";
 
 function SnippetDetailPage() {
     const snippetId = useParams().id;
@@ -60,6 +62,34 @@ function SnippetDetailPage() {
                         </div>
                     </div>
 
+                    {/* Code Editor */}
+                    <div className="mb-8 rounded-2xl overflow-hidden border border-[#ffffff0a] bg-[#121218]">
+                        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-[#ffffff0a]">
+                            <div className="flex items-center gap-2 text-[#808086]">
+                                <Code className="w-4 h-4" />
+                                <span className="text-sm font-medium">Source Code</span>
+                            </div>
+                            <CopyButton code={snippet.code} />
+                        </div>
+                        <Editor
+                            height="600px"
+                            language={LANGUAGE_CONFIG[snippet.language].monacoLanguage}
+                            value={snippet.code}
+                            theme="vs-dark"
+                            beforeMount={defineMonacoThemes}
+                            options={{
+                                minimap: { enabled: false },
+                                fontSize: 16,
+                                readOnly: true,
+                                automaticLayout: true,
+                                scrollBeyondLastLine: false,
+                                padding: { top: 16 },
+                                renderWhitespace: "selection",
+                                fontFamily: '"Fira Code", "Cascadia Code", Consolas, monospace',
+                                fontLigatures: true,
+                            }}
+                        />
+                    </div>
 
                 </div>
             </main>
