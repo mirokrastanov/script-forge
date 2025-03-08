@@ -11,11 +11,22 @@ function CommentContent({ content }: { content: string }) {
                     // ```javascript
                     // const name = "John";
                     // ```
-                    const match = part.match(/```([\w-]*)\n([\s\S]*?)\n```/);
+                    const regexCheck = /```([\w-]*)\n([\s\S]*?)\n```/;
+                    let match: RegExpMatchArray | null = part.match(regexCheck);
+
+                    if (!match) {
+                        const matchStart = part.substring(0, part.indexOf('\n')).trim();
+                        const matchEnd = part.substring(part.indexOf('\n'), part.length);
+                        const matchFinal = matchStart + matchEnd;
+                        // console.log(part, '\n', matchFinal);
+                        match = matchFinal.match(regexCheck);
+                        // console.log(match);
+                    }
 
                     if (match) {
-                        const [language, code] = match;
-                        return <CodeBlock language={language} code={code} key={index} />;
+                        const [_, language, code] = match;
+                        console.log('lang:', language);
+                        return <CodeBlock language={language.trim()} code={code} key={index} />;
                     }
                 }
 
