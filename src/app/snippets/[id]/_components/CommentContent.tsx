@@ -1,8 +1,9 @@
+import { LANGUAGE_CONFIG } from "@/app/(root)/_constants";
 import CodeBlock from "./CodeBlock";
 
 function CommentContent({ content }: { content: string }) {
-    // regex
-    const parts = content.split(/(```[\w-]*\n[\s\S]*?\n```)/g);
+
+    const parts = content.split(/(```[\w]*([ ]*)\n[\s\S]*?\n```)/g);
 
     return (
         <div className="max-w-none text-white">
@@ -11,23 +12,24 @@ function CommentContent({ content }: { content: string }) {
                     // ```javascript
                     // const name = "John";
                     // ```
-                    const regexCheck = /```([\w-]*)\n([\s\S]*?)\n```/;
-                    let match: RegExpMatchArray | null = part.match(regexCheck);
-
-                    if (!match) {
-                        const matchStart = part.substring(0, part.indexOf('\n')).trim();
-                        const matchEnd = part.substring(part.indexOf('\n'), part.length);
-                        const matchFinal = matchStart + matchEnd;
-                        // console.log(part, '\n', matchFinal);
-                        match = matchFinal.match(regexCheck);
-                        // console.log(match);
-                    }
+                    const regexCheck = /```([a-zA-Z0-9-]+[ ]*)\n([\s\S]*?)\n```/;
+                    const match = part.match(regexCheck);
+                    let [language, code]: [string, string] = ['plaintext', ''];
+                    const allowedLanguages = Object.keys(LANGUAGE_CONFIG);
 
                     if (match) {
-                        const [_, language, code] = match;
-                        console.log('lang:', language);
-                        return <CodeBlock language={language.trim()} code={code} key={index} />;
+                        language = match[1].trim();
+                        code = match[2].trim();
+                        if (!allowedLanguages.includes(language)) language = `unsupported language`;
                     }
+
+                    if (code == '') {
+                        code = part.split('```').filter(x => x != '').join('').trim();
+                    }
+
+                    // const [_, language, code] = match;
+                    // console.log('lang:<' + language + '>');
+                    return <CodeBlock language={language} code={code} key={index} />;
                 }
 
                 return part.split("\n").map((line, lineIdx) => (
