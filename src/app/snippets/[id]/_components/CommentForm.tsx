@@ -1,6 +1,7 @@
 import { CodeIcon, SendIcon } from "lucide-react";
 import { useState } from "react";
 import CommentContent from "./CommentContent";
+import { LANGUAGE_CONFIG } from "@/app/(root)/_constants";
 
 interface CommentFormProps {
     onSubmit: (comment: string) => Promise<void>;
@@ -66,13 +67,14 @@ function CommentForm({ isSubmitting, onSubmit }: CommentFormProps) {
 
                 {/* Comment Form Footer */}
                 <div className="flex items-center justify-between gap-4 px-4 py-3 bg-[#080809] border-t border-[#ffffff0a]">
-                    <div className="hidden sm:block text-xs text-[#808086] space-y-1">
+                    <div className="hidden sm:block text-[13px] text-[#bebec2] space-y-1">
                         <div className="flex items-center gap-2">
                             <CodeIcon className="w-3.5 h-3.5" />
                             <span>Format code with ```language</span>
                         </div>
-                        <div className="text-[#808086]/60 pl-5">
-                            Tab key inserts spaces • Preview your comment before posting
+                        <div className="text-[#808086] pl-5 text-[13px]">
+                            {/* Tab key inserts spaces • Preview your comment before posting */}
+                            Allowed languages: {Object.keys(LANGUAGE_CONFIG).join(', ')}
                         </div>
                     </div>
                     <button
