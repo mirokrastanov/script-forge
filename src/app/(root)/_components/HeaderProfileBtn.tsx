@@ -1,6 +1,7 @@
 "use client";
 
-import { SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import LoginButton from "@/components/LoginButton";
+import { SignedOut, UserButton } from "@clerk/nextjs";
 import { User } from "lucide-react";
 
 function HeaderProfileBtn() {
@@ -8,13 +9,16 @@ function HeaderProfileBtn() {
         <>
             <UserButton>
                 <UserButton.MenuItems>
-                    <UserButton.Link href="/profile" label="Profile"
-                        labelIcon={<User className="size-4" />} />
+                    <UserButton.Link
+                        label="Profile"
+                        labelIcon={<User className="size-4" />}
+                        href="/profile"
+                    />
                 </UserButton.MenuItems>
             </UserButton>
 
             <SignedOut>
-                <SignInButton />
+                <LoginButton />
             </SignedOut>
         </>
     );
