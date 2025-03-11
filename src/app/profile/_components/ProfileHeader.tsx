@@ -116,6 +116,52 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
                 </div>
             </div>
 
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                {STATS.map((stat, index) => (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        key={index}
+                        className="group relative bg-gradient-to-br from-black/40 to-black/20 rounded-2xl overflow-hidden"
+                    >
+                        {/* Glow effect */}
+                        <div
+                            className={`absolute inset-0 bg-gradient-to-r ${stat.color} opacity-0 group-hover:opacity-10 transition-all 
+              duration-500 ${stat.gradient}`}
+                        />
+
+                        {/* Content */}
+                        <div className="relative p-6">
+                            <div className="flex items-start justify-between mb-4">
+                                <div>
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="text-sm font-medium text-gray-400">{stat.description}</span>
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-white tracking-tight">
+                                        {typeof stat.value === "number" ? stat.value.toLocaleString() : stat.value}
+                                    </h3>
+                                    <p className="text-sm text-gray-400 mt-1">{stat.label}</p>
+                                </div>
+                                <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} bg-opacity-10`}>
+                                    <stat.icon className="w-5 h-5 text-white" />
+                                </div>
+                            </div>
+
+                            {/* Additional metric */}
+                            <div className="flex items-center gap-2 pt-4 border-t border-gray-800/50">
+                                <stat.metric.icon className="w-4 h-4 text-gray-500" />
+                                <span className="text-sm text-gray-400">{stat.metric.label}:</span>
+                                <span className="text-sm font-medium text-white">{stat.metric.value}</span>
+                            </div>
+                        </div>
+
+                        {/* Interactive hover effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full duration-1000 transition-transform" />
+                    </motion.div>
+                ))}
+            </div>
         </div>
     );
 }
