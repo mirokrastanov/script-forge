@@ -23,7 +23,7 @@
 
 
 ## Tech Stack
-<p align="center">
+<p>
     <a href="https://nextjs.org/docs" target="_blank">
         <img align="center" alt="Next.js" height="60px" title="Next.js"
             src="https://github.com/tandpfun/skill-icons/raw/main/icons/NextJS-Dark.svg" />
@@ -50,7 +50,7 @@
     </a>
 </p>
 
-### Additional Libraries
+#### Additional Libraries
 - Monaco-Editor - Provides VSCode-like functionality 
 - Framer-motion - Animations
 - Lucide-react - Icons
@@ -59,18 +59,18 @@
 
 
 ## Sneak Peak
-<p align="center"><a href="https://nba-1-480a7.web.app/"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/1.png" alt="game-image"></a></p>
+<p align="center"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/1.png" alt="game-image"></p>
 
 <p align="center">
-    <a href="https://nba-1-480a7.web.app/"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/2.png" alt="game-image" height="200px"></a>
-    <a href="https://nba-1-480a7.web.app/"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/3.png" alt="game-image" height="200px"></a>
+    <img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/2.png" alt="game-image">
+    <img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/3.png" alt="game-image">
 </p>
 
-<p align="center"><a href="https://nba-1-480a7.web.app/"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/4.png" alt="game-image"></a></p>
-<p align="center"><a href="https://nba-1-480a7.web.app/"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/5.png" alt="game-image"></a></p>
-<p align="center"><a href="https://nba-1-480a7.web.app/"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/6.png" alt="game-image"></a></p>
-<p align="center"><a href="https://nba-1-480a7.web.app/"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/7.png" alt="game-image"></a></p>
-<p align="center"><a href="https://nba-1-480a7.web.app/"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/8.png" alt="game-image"></a></p>
+<p align="center"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/4.png" alt="game-image"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/5.png" alt="game-image"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/6.png" alt="game-image"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/7.png" alt="game-image"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/mirokrastanov/script-forge/refs/heads/main/preview-images/8.png" alt="game-image"></p>
 
 
 ## Live Demo
