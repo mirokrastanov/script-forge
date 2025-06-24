@@ -76,3 +76,10 @@
 ## Live Demo
 <a href="https://script-forge-phi.vercel.app/" target="_blank"><img src="https://github.com/mirokrastanov/Software-Engineering-SoftUni/blob/main/miscellaneous/try-now-btn.png?raw=true" height="60px" /></a>
 <br />
+
+
+## Credits
+- **@AsAProgrammer** on YT ▶ - Great Tutorials for MERN, PERN, etc.
+- **@Microsoft** - Code Editor API, Highlighting, IntelliSense, etc.
+- **@Vercel** - Free Hosting, Deployment, CI/CD, etc.
+- ...In progress...
